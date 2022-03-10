@@ -8,44 +8,47 @@ import static org.junit.jupiter.api.Assertions.*;
 class RadioTest {
 
     @ParameterizedTest
-    //Тест на ввод номера станции вручную по номеру с использованием метода граничных значений
-    @CsvSource(value = {"middleStation, 5, 5",
-            "nearLastStation, 8, 8",
-            "lastStation, 9, 9",
-            "overLastStation, 10, 0",
+    //Тест на ввод номера станции вручную при количестве станций, заданных пользователем
+    @CsvSource(value = {"middleStation, 25, 25",
+            "nearLastStation, 48, 48",
+            "lastStation, 49, 49",
+            "overLastStation, 50, 0",
             "secondStation, 0, 0",
             "overSecondStation, 1, 1",
             "minusStation, -1, 0"})
     void setCurrentNumberStation(String testName, int currentNumberStation, int expected) {
-        Radio radio = new Radio();
+        Radio radio1 = new Radio(50,49);
 
-        radio.setCurrentNumberStation(currentNumberStation);
+        radio1.setCurrentNumberStation(currentNumberStation);
 
-        int actual = radio.getCurrentNumberStation();
+        int actual = radio1.getCurrentNumberStation();
         assertEquals(expected, actual);
     }
 
+
     @ParameterizedTest
-    //Тест на переключение вверх на одну станцию при нажатии на кнопку Next
-    @CsvSource(value = {"middleStation, 5, 6",
-            "nearLastStation, 8, 9",
-            "lastStation, 9, 0",
+    // Тест на переключение вверх на одну станцию при нажатии на кнопку Next
+    // (количество станций и максимальный номер станции заданы пользователем)
+    @CsvSource(value = {"middleStation, 59, 60",
+            "nearLastStation, 89, 90",
+            "lastStation, 90, 0",
             "secondStation, 0, 1",
             "overSecondStation, 1, 2"})
     void nextNumberStation(String testName, int currentNumberStation, int expected) {
-        Radio radio = new Radio();
+        Radio radio1 = new Radio(91,90);
 
-        radio.setCurrentNumberStation(currentNumberStation);
+        radio1.setCurrentNumberStation(currentNumberStation);
 
-        radio.nextNumberStation();
+        radio1.nextNumberStation();
 
-        int actual = radio.getCurrentNumberStation();
+        int actual = radio1.getCurrentNumberStation();
         assertEquals(expected, actual);
     }
 
 
     @ParameterizedTest
-    //Тест на переключение вверх на одну станцию вниз при нажатии на кнопку Prev
+    // Тест на переключение вверх на одну станцию вниз при нажатии на кнопку Prev
+    // (количество станций и максимальный номер станции по умолчанию)
     @CsvSource(value = {"middleStation, 5, 4",
             "nearLastStation, 8, 7",
             "lastStation, 9, 8",
@@ -65,8 +68,8 @@ class RadioTest {
     @ParameterizedTest
     //Тест на увеличение громкости на одну градацию при нажатии на кнопку +
     @CsvSource(value = {"middleStation, 5, 6",
-            "nearLastStation, 9, 10",
-            "lastStation, 10, 10",
+            "nearLastStation, 99, 100",
+            "lastStation, 100, 100",
             "secondStation, 0, 1",
             "overSecondStation, 1, 2"})
     void increaseVolume(String testName, int currentVolume, int expected) {
@@ -83,8 +86,8 @@ class RadioTest {
     @ParameterizedTest
     //Тест на уменьшение громкости на одну градацию при нажатии на кнопку -
     @CsvSource(value = {"middleStation, 5, 4",
-            "nearLastStation, 9, 8",
-            "lastStation, 10, 9",
+            "nearLastStation, 99, 98",
+            "lastStation, 100, 99",
             "secondStation, 0, 0",
             "overSecondStation, 1, 0"})
     void decreaseVolume(String testName, int currentVolume, int expected) {
