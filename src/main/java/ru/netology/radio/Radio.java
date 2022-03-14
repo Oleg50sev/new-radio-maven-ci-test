@@ -5,20 +5,22 @@ public class Radio {
     private int currentNumberStation; // текущий номер станции
     private int currentVolume; // текущая громкость
     private int minNumberStation = 0; // минимальный номер станции
-    private int maxNumberStation = 9; // максимальный номер станции по умолчанию
+    private int maxNumberStation;
     private int minVolume = 0; // минимальная громкость
     private int maxVolume = 100; // максимальная громкость
 
-    // конструктор для установки количества станций и максимального номера станции пользователем
-    public Radio(int quantityStations, int maxNumberStation) {
+    // конструктор для установки количества станций пользователем
+    public Radio(int quantityStations) {
         this.quantityStations = quantityStations;
-        this.maxNumberStation = maxNumberStation;
     }
 
     // конструктор для установки количества станций и максимального номера станции по умолчанию
     public Radio() {
     }
 
+    public int getMaxNumberStation() {
+        return maxNumberStation = quantityStations - 1;
+    }
 
     public int getCurrentNumberStation() {
         return currentNumberStation;
