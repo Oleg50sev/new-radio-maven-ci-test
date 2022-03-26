@@ -19,7 +19,6 @@ class RadioTest {
     void setCurrentNumberStation(String testName, int currentNumberStation, int expected) {
         Radio radio1 = new Radio(50);
 
-        radio1.getMaxNumberStation();
         radio1.setCurrentNumberStation(currentNumberStation);
 
         int actual = radio1.getCurrentNumberStation();
@@ -38,8 +37,6 @@ class RadioTest {
     void nextNumberStation(String testName, int currentNumberStation, int expected) {
         Radio radio1 = new Radio(91);
 
-        radio1.getMaxNumberStation();
-
         radio1.setCurrentNumberStation(currentNumberStation);
 
         radio1.nextNumberStation();
@@ -50,7 +47,7 @@ class RadioTest {
 
 
     @ParameterizedTest
-    // Тест на переключение вверх на одну станцию вниз при нажатии на кнопку Prev
+    // Тест на переключение вниз на одну станцию при нажатии на кнопку Prev
     // (количество станций по умолчанию)
     @CsvSource(value = {"middleStation, 5, 4",
             "nearLastStation, 8, 7",
@@ -59,8 +56,6 @@ class RadioTest {
             "overSecondStation, 1, 0"})
     void prevNumberStation(String testName, int currentNumberStation, int expected) {
         Radio radio = new Radio();
-
-        radio.getMaxNumberStation();
 
         radio.setCurrentNumberStation(currentNumberStation);
 
